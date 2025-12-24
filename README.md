@@ -1,10 +1,188 @@
 # 🤖 ML Classification Toolkit
 
-GUI tabanlı makine öğrenmesi sınıflandırma ve değerlendirme uygulaması.
+A GUI-based machine learning classification and evaluation application.
 
 ![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
 ![Tkinter](https://img.shields.io/badge/GUI-Tkinter-green.svg)
 ![scikit-learn](https://img.shields.io/badge/ML-scikit--learn-orange.svg)
+
+## 📋 Table of Contents
+
+- [Features](#-features)
+- [Requirements](#-requirements)
+- [Installation](#-installation)
+- [Usage](#-usage)
+- [Project Structure](#-project-structure)
+- [Models](#-models)
+- [Metrics](#-metrics)
+
+---
+
+## ✨ Features
+
+### Data Processing
+- 📂 CSV file upload
+- 🎯 Automatic target column recommendation
+- 📊 Dataset summary (rows/columns, missing values, column types)
+- 📈 Class distribution visualization
+
+### Preprocessing
+- 🔄 **One-Hot Encoding**: Convert categorical variables to numerical form
+- 📏 **Normalization**: Scaling with StandardScaler or MinMaxScaler
+- 🎛️ **Missing Value Imputation**: Median for numeric, most frequent for categorical
+- 🗂️ **Binning**: Discretize numeric target into classes (3, 5, or 7 classes)
+
+### Model Options
+- ⚡ **Perceptron**: Fast linear classifier
+- 🧠 **MLP (Multi-Layer Perceptron)**: Neural network (1-4 hidden layers)
+- 🌳 **Decision Tree**: Decision tree classifier
+
+### MLP Configuration
+- Number of hidden layers (1-4)
+- Neurons per layer
+- Activation function (ReLU, Tanh, Logistic)
+- Learning rate
+- Maximum iterations
+
+### Evaluation
+- 📊 Adjustable Train/Test split ratio (0.10 - 0.50)
+- 📋 Metrics table (Accuracy, Precision, Recall, F1-Score)
+- 🎨 Confusion Matrix visualization
+- 📝 Detailed run log
+
+---
+
+## 📦 Requirements
+
+```
+Python >= 3.8
+pandas
+numpy
+scikit-learn
+matplotlib
+tkinter (comes with Python)
+```
+
+---
+
+## 🚀 Installation
+
+### 1. Install Dependencies
+
+```bash
+pip install pandas numpy scikit-learn matplotlib
+```
+
+### 2. Run the Project
+
+```bash
+python app.py
+```
+
+---
+
+## 📖 Usage
+
+### Step 1: Load Dataset
+1. Click "Upload CSV" button in the **Dataset** tab
+2. Select your CSV file (first row should contain column names)
+3. Choose the target (label) column or use "Auto-pick" for automatic selection
+
+### Step 2: Configure Settings
+1. Switch to the **Settings** tab
+2. Configure preprocessing options:
+   - One-Hot Encoding (for categorical features)
+   - Normalization (StandardScaler or MinMaxScaler)
+3. Set the Train/Test split ratio
+4. Select the models you want to use
+5. If using MLP, adjust the hyperparameters
+
+### Step 3: Train and Evaluate
+1. Click the "Train & Evaluate" button
+2. Wait for training to complete
+3. Review results in the **Results** tab
+
+### Step 4: Review Results
+- Compare performance of all models in the metrics table
+- Select a model from the Confusion Matrix dropdown to view the matrix
+- Review detailed information in the Run Log
+
+---
+
+## 📁 Project Structure
+
+```
+ml-project2/
+├── app.py                          # Main GUI application (Tkinter)
+├── ml_core.py                      # ML logic (preprocessing, training, evaluation)
+├── ui_helpers.py                   # UI helper functions (ToolTip)
+├── sample_classification_risk.csv  # Sample dataset
+└── README.md                       # This file
+```
+
+### File Descriptions
+
+| File | Description |
+|------|-------------|
+| `app.py` | Tkinter-based graphical user interface. Manages tabs, buttons, charts, and user interactions. |
+| `ml_core.py` | Machine learning core logic. Contains data preprocessing, model creation, training, and evaluation functions. |
+| `ui_helpers.py` | Contains UI helper components like tooltips. |
+
+---
+
+## 🤖 Models
+
+### Perceptron
+- **Type**: Single-layer linear classifier
+- **Advantages**: Fast training, simple structure
+- **Recommendations**: Works better with normalization
+
+### MLP (Multi-Layer Perceptron)
+- **Type**: Multi-layer artificial neural network
+- **Advantages**: Can learn non-linear patterns
+- **Parameters**:
+  - `hidden_layers`: 1-4 hidden layers
+  - `neurons`: Number of neurons per layer
+  - `activation`: relu, tanh, logistic
+  - `learning_rate_init`: Initial learning rate
+  - `max_iter`: Maximum iterations
+
+### Decision Tree
+- **Type**: Decision tree-based classifier
+- **Advantages**: Interpretable, no scaling required
+- **Recommendations**: Watch out for overfitting
+
+---
+
+## 📊 Metrics
+
+| Metric | Description |
+|--------|-------------|
+| **Accuracy** | Correct prediction ratio (total correct / total samples) |
+| **Precision** | Accuracy of positive predictions (TP / (TP + FP)) |
+| **Recall** | True positive detection rate (TP / (TP + FN)) |
+| **F1-Score** | Harmonic mean of Precision and Recall |
+
+> 💡 **Weighted average** is used for multi-class problems.
+
+---
+
+## ⚠️ Important Notes
+
+1. **Numeric Target Variables**: If your target column is numeric (e.g., age, income), binning is recommended when there are more than 25 unique values.
+
+2. **Categorical Features**: Keep One-Hot Encoding enabled if your input features contain categorical data.
+
+3. **MLP Convergence Warning**: If the MLP model doesn't converge within the specified iterations, you may receive a warning. In this case, you can increase the `max_iter` value.
+
+4. **Data Quality**: Missing values are automatically imputed (median/most frequent).
+
+---
+---
+
+# 🤖 ML Sınıflandırma Araç Kiti
+
+GUI tabanlı makine öğrenmesi sınıflandırma ve değerlendirme uygulaması.
 
 ## 📋 İçindekiler
 
@@ -15,7 +193,6 @@ GUI tabanlı makine öğrenmesi sınıflandırma ve değerlendirme uygulaması.
 - [Proje Yapısı](#-proje-yapısı)
 - [Modeller](#-modeller)
 - [Metrikler](#-metrikler)
-- [Ekran Görüntüleri](#-ekran-görüntüleri)
 
 ---
 
@@ -168,25 +345,6 @@ ml-project2/
 
 ---
 
-## 🖼️ Ekran Görüntüleri
-
-### Dataset Sekmesi
-- CSV yükleme
-- Hedef sütun seçimi
-- Veri özeti görüntüleme
-
-### Settings Sekmesi
-- Ön işleme ayarları
-- Model seçimi
-- MLP hiperparametreleri
-
-### Results Sekmesi
-- Metrik tablosu
-- Confusion Matrix görselleştirmesi
-- Çalıştırma günlüğü
-
----
-
 ## ⚠️ Önemli Notlar
 
 1. **Sayısal Hedef Değişkenler**: Eğer hedef sütununuz sayısal ise (örn: yaş, gelir), 25'ten fazla benzersiz değer varsa binning önerilir.
@@ -196,27 +354,3 @@ ml-project2/
 3. **MLP Yakınsama Uyarısı**: MLP modeli belirtilen iterasyon sayısında yakınsayamazsa uyarı alabilirsiniz. Bu durumda `max_iter` değerini artırabilirsiniz.
 
 4. **Veri Kalitesi**: Eksik değerler otomatik olarak doldurulur (medyan/en sık değer).
-
----
-
-## 🔧 Geliştirme
-
-### Yeni Model Eklemek
-
-`ml_core.py` dosyasındaki `get_models()` fonksiyonuna yeni model ekleyebilirsiniz:
-
-```python
-from sklearn.ensemble import RandomForestClassifier
-
-def get_models(cfg: TrainConfig) -> Dict[str, object]:
-    models = {}
-    # ... mevcut modeller ...
-    
-    if cfg.use_random_forest:  # Yeni bayrak
-        models["Random Forest"] = RandomForestClassifier(
-            n_estimators=100,
-            random_state=cfg.random_state
-        )
-    
-    return models
-```
